@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { TOKEN_METADATA } from '@/config/monad';
 
 const TOKENS = [
-  { symbol: 'MON', name: 'Monad', color: 'neon-purple' },
-  { symbol: 'USDC', name: 'USD Coin', color: 'neon-blue' },
-  { symbol: 'RAY', name: 'Raydium', color: 'neon-green' },
-  { symbol: 'SRM', name: 'Serum', color: 'neon-yellow' },
-  { symbol: 'FTT', name: 'FTX Token', color: 'neon-orange' },
-  { symbol: 'COPE', name: 'Cope', color: 'neon-pink' },
-];
+  { symbol: 'MON', name: TOKEN_METADATA.MON.name, color: 'neon-purple' },
+  { symbol: 'WETH', name: TOKEN_METADATA.WETH.name, color: 'neon-blue' },
+  { symbol: 'USDC', name: TOKEN_METADATA.USDC.name, color: 'neon-green' },
+  { symbol: 'USDT', name: TOKEN_METADATA.USDT.name, color: 'neon-yellow' },
+  { symbol: 'WBTC', name: TOKEN_METADATA.WBTC.name, color: 'neon-orange' },
+] as const;
 
 interface SpinWheelProps {
   onTokenSelected: (token: typeof TOKENS[0]) => void;

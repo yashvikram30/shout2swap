@@ -6,6 +6,7 @@ import {
   MONAD_CONFIG,
   ZEROX_CONFIG,
   TOKEN_ADDRESSES,
+  ZEROX_TOKEN_ADDRESSES,
   TOKEN_METADATA,
   FALLBACK_CONFIG,
   DEMO_SWAP_CONFIG,
@@ -116,12 +117,13 @@ export const SwapExecutor = ({
     setError(null);
 
     try {
-      const sellToken = TOKEN_ADDRESSES.MON;
-      const buyToken = TOKEN_ADDRESSES[tokenSymbol as keyof typeof TOKEN_ADDRESSES] || TOKEN_ADDRESSES.USDC;
+      const sellToken = ZEROX_TOKEN_ADDRESSES.MON;
+      const buyToken = ZEROX_TOKEN_ADDRESSES[tokenSymbol as keyof typeof ZEROX_TOKEN_ADDRESSES] || ZEROX_TOKEN_ADDRESSES.USDC;
       const monadAmount = calculateMonadAmount(voicePercentage);
-      const sellAmount = ethers.parseEther(monadAmount);
+      const minimumAmount = Math.max(parseFloat(monadAmount), 0.0001).toFixed(6);
+      const sellAmount = ethers.parseEther(minimumAmount);
 
-      console.log('📊 0x price parameters:', { sellToken, buyToken, monadAmount, sellAmount: sellAmount.toString() });
+      console.log('📊 0x price parameters:', { sellToken, buyToken, monadAmount: minimumAmount, sellAmount: sellAmount.toString() });
 
       const indicativePrice = await zeroXService.getPrice(sellToken, buyToken, sellAmount.toString(), userAddress);
       setPrice(indicativePrice);
@@ -148,12 +150,13 @@ export const SwapExecutor = ({
     setError(null);
 
     try {
-      const sellToken = TOKEN_ADDRESSES.MON; // Always sell MON (native token)
-      const buyToken = TOKEN_ADDRESSES[tokenSymbol as keyof typeof TOKEN_ADDRESSES] || TOKEN_ADDRESSES.USDC;
+      const sellToken = ZEROX_TOKEN_ADDRESSES.MON; // Always sell MON (native token sentinel for 0x)
+      const buyToken = ZEROX_TOKEN_ADDRESSES[tokenSymbol as keyof typeof ZEROX_TOKEN_ADDRESSES] || ZEROX_TOKEN_ADDRESSES.USDC;
       const monadAmount = calculateMonadAmount(voicePercentage);
-      const sellAmount = ethers.parseEther(monadAmount); // Use calculated amount based on voice
+      const minimumAmount = Math.max(parseFloat(monadAmount), 0.0001).toFixed(6);
+      const sellAmount = ethers.parseEther(minimumAmount); // Use calculated amount based on voice
 
-      console.log('📊 0x quote parameters:', { sellToken, buyToken, monadAmount, sellAmount: sellAmount.toString() });
+      console.log('📊 0x quote parameters:', { sellToken, buyToken, monadAmount: minimumAmount, sellAmount: sellAmount.toString() });
 
       const swapQuote = await getSwapQuote(sellToken, buyToken, sellAmount.toString());
       console.log('✅ 0x quote set successfully:', swapQuote);
