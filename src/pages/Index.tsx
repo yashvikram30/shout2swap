@@ -65,8 +65,8 @@ const Index = () => {
     setCurrentStep('celebrate');
     console.log('✅ Step changed to: celebrate');
     
-    // Prevent auto-reset for now - let user manually close celebration
-    console.log('🎉 Celebration will show for 5 seconds before auto-closing');
+    // Celebration will stay open until user manually closes it
+    console.log('🎉 Celebration will stay open until manually closed');
   };
 
   const handleCelebrationClose = () => {
@@ -142,12 +142,12 @@ const Index = () => {
         </p>
         
         {/* Debug Info */}
-        <div className="mt-4 p-3 bg-black/50 rounded-lg text-xs text-green-400 font-mono">
+        {/* <div className="mt-4 p-3 bg-black/50 rounded-lg text-xs text-green-400 font-mono">
           <div>🔍 DEBUG: Step = {currentStep}</div>
           <div>🎯 Token = {selectedToken ? selectedToken.symbol : 'none'}</div>
           <div>🎤 Voice = {Math.round(voicePercentage * 100)}%</div>
           <div>🔗 Wallet = {walletAddress ? 'connected' : 'disconnected'}</div>
-        </div>
+        </div> */}
         
         {/* Progress indicator */}
         <div className="flex justify-center mt-6 space-x-4">

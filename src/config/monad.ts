@@ -114,13 +114,9 @@ export const FALLBACK_CONFIG = {
 
 // Real Monad Testnet token addresses
 export const TOKEN_ADDRESSES = {
-  MON: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', // Native MON token sentinel used by 0x
-  WETH: '0xB5a30b0FDc5EA94A52fDc42e3E9760Cb8449Fb37', // Wrapped ETH on Monad testnet
+  MON: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', // Native MON token sentinel used by 0x (sell token)
   USDC: '0xf817257fed379853cDe0fa4F97AB987181B1E5Ea', // USDC on Monad testnet
-  USDT: '0x88b8E2161DEDC77EF4ab7585569D2415a1C1055D', // USDT on Monad testnet
-  DAI: '0x0000000000000000000000000000000000000000', // DAI not available on Monad testnet yet
   WBTC: '0xcf5a6076cfa32686c0Df13aBaDa2b40dec133F1d', // WBTC on Monad testnet
-  WSOL: '0x5387C85A4965769f6B0Df430638a1388493486F1', // WSOL on Monad testnet
 };
 
 // For demo purposes, we'll use a simple self-transfer when 0x API is not available
@@ -132,14 +128,16 @@ export const DEMO_SWAP_CONFIG = {
 
 // Token metadata for display
 export const TOKEN_METADATA = {
-  MON: { symbol: 'MON', name: 'Monad', decimals: 18 },
-  WETH: { symbol: 'WETH', name: 'Wrapped Ether', decimals: 18 },
+  MON: { symbol: 'MON', name: 'Monad', decimals: 18 }, // Sell token only
   USDC: { symbol: 'USDC', name: 'USD Coin', decimals: 6 },
-  USDT: { symbol: 'USDT', name: 'Tether USD', decimals: 6 },
-  DAI: { symbol: 'DAI', name: 'Dai Stablecoin', decimals: 18 },
   WBTC: { symbol: 'WBTC', name: 'Wrapped Bitcoin', decimals: 8 },
-  WSOL: { symbol: 'WSOL', name: 'Wrapped Solana', decimals: 9 },
 };
+
+// Tokens available for buying (excluding MON which is the sell token)
+export const BUYABLE_TOKENS = [
+  { symbol: 'USDC', name: 'USD Coin', color: 'neon-blue' },
+  { symbol: 'WBTC', name: 'Wrapped Bitcoin', color: 'neon-orange' },
+] as const;
 
 // 0x Swap API interfaces
 export interface ZeroXQuoteRequest {

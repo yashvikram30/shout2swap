@@ -1,24 +1,16 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-
-const TOKENS = [
-  { symbol: 'MON', name: 'Monad', color: 'neon-purple' },
-  { symbol: 'USDC', name: 'USD Coin', color: 'neon-blue' },
-  { symbol: 'RAY', name: 'Raydium', color: 'neon-green' },
-  { symbol: 'SRM', name: 'Serum', color: 'neon-yellow' },
-  { symbol: 'FTT', name: 'FTX Token', color: 'neon-orange' },
-  { symbol: 'COPE', name: 'Cope', color: 'neon-pink' },
-];
+import { BUYABLE_TOKENS } from '@/config/monad';
 
 interface SpinWheelProps {
-  onTokenSelected: (token: typeof TOKENS[0]) => void;
+  onTokenSelected: (token: (typeof BUYABLE_TOKENS)[number]) => void;
   disabled?: boolean;
 }
 
 export const SpinWheel = ({ onTokenSelected, disabled }: SpinWheelProps) => {
   const [isSpinning, setIsSpinning] = useState(false);
-  const [selectedToken, setSelectedToken] = useState<typeof TOKENS[0] | null>(null);
+  const [selectedToken, setSelectedToken] = useState<(typeof BUYABLE_TOKENS)[number] | null>(null);
 
   const handleSpin = () => {
     if (isSpinning) return;
@@ -28,7 +20,7 @@ export const SpinWheel = ({ onTokenSelected, disabled }: SpinWheelProps) => {
 
     // Random selection after spin animation
     setTimeout(() => {
-      const randomToken = TOKENS[Math.floor(Math.random() * TOKENS.length)];
+      const randomToken = BUYABLE_TOKENS[Math.floor(Math.random() * BUYABLE_TOKENS.length)];
       setSelectedToken(randomToken);
       setIsSpinning(false);
       onTokenSelected(randomToken);
@@ -49,8 +41,8 @@ export const SpinWheel = ({ onTokenSelected, disabled }: SpinWheelProps) => {
           }}
           className="w-64 h-64 rounded-full arcade-border bg-gradient-to-br from-neon-pink via-neon-purple to-neon-blue relative overflow-hidden"
         >
-          {TOKENS.map((token, index) => {
-            const angle = (index * 360) / TOKENS.length;
+          {BUYABLE_TOKENS.map((token, index) => {
+            const angle = (index * 360) / BUYABLE_TOKENS.length;
             return (
               <div
                 key={token.symbol}

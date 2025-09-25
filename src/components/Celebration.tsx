@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface CelebrationProps {
@@ -8,6 +8,7 @@ interface CelebrationProps {
 
 export const Celebration = ({ show, onClose }: CelebrationProps) => {
   const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number; emoji: string }>>([]);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     if (show) {
@@ -20,15 +21,49 @@ export const Celebration = ({ show, onClose }: CelebrationProps) => {
       }));
       setParticles(newParticles);
 
-      // Auto close after 10 seconds (increased from 5 to give more time)
-      const timer = setTimeout(() => {
-        console.log('🎉 Auto-closing celebration after 10 seconds');
-        onClose();
-      }, 10000);
-
-      return () => clearTimeout(timer);
+      // Play celebration music
+      playCelebrationMusic();
+    } else {
+      // Stop music when celebration is closed
+      stopCelebrationMusic();
     }
-  }, [show, onClose]);
+
+    // Cleanup on unmount
+    return () => {
+      stopCelebrationMusic();
+    };
+  }, [show]);
+
+  const playCelebrationMusic = () => {
+    try {
+      // Create and play the win.mp3 audio file
+      const audio = new Audio('/win.mp3');
+      audio.volume = 0.7; // Set volume to 70%
+      audio.loop = false; // Don't loop the audio
+      
+      // Play the audio
+      audio.play().catch((error) => {
+        console.log('🎵 Could not play win.mp3:', error);
+      });
+
+      // Store reference for cleanup
+      audioRef.current = audio;
+    } catch (error) {
+      console.log('🎵 Could not play celebration music:', error);
+    }
+  };
+
+  const stopCelebrationMusic = () => {
+    if (audioRef.current) {
+      try {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+        audioRef.current = null;
+      } catch (error) {
+        console.log('🎵 Could not stop celebration music:', error);
+      }
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -138,9 +173,14 @@ export const Celebration = ({ show, onClose }: CelebrationProps) => {
             <motion.div
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ duration: 1.5, repeat: Infinity }}
-              className="text-sm text-muted-foreground"
+              className="text-lg text-muted-foreground space-y-2"
             >
-              Click anywhere to continue the party! 🎪
+              <div className="font-bold text-neon-yellow">
+                🎵 CELEBRATION MUSIC PLAYING! 🎵
+              </div>
+              <div>
+                Click anywhere to close and start a new swap! 🎪
+              </div>
             </motion.div>
           </motion.div>
 

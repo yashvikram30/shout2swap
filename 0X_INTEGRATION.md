@@ -33,12 +33,9 @@ Real Monad testnet token addresses are already configured in `src/config/monad.t
 
 ```typescript
 export const TOKEN_ADDRESSES = {
-  MON: '0x0000000000000000000000000000000000000000', // Native MON token
-  WETH: '0xB5a30b0FDc5EA94A52fDc42e3E9760Cb8449Fb37', // Wrapped ETH on Monad testnet
+  MON: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', // Native MON token sentinel for 0x
   USDC: '0xf817257fed379853cDe0fa4F97AB987181B1E5Ea', // USDC on Monad testnet
-  USDT: '0x88b8E2161DEDC77EF4ab7585569D2415a1C1055D', // USDT on Monad testnet
   WBTC: '0xcf5a6076cfa32686c0Df13aBaDa2b40dec133F1d', // WBTC on Monad testnet
-  WSOL: '0x5387C85A4965769f6B0Df430638a1388493486F1', // WSOL on Monad testnet
 };
 ```
 

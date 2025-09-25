@@ -40,11 +40,8 @@ Real Monad testnet token addresses are already configured:
 ```typescript
 export const TOKEN_ADDRESSES = {
   MON: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', // Native MON token sentinel for 0x
-  WETH: '0xB5a30b0FDc5EA94A52fDc42e3E9760Cb8449Fb37', // Wrapped ETH on Monad testnet
   USDC: '0xf817257fed379853cDe0fa4F97AB987181B1E5Ea', // USDC on Monad testnet
-  USDT: '0x88b8E2161DEDC77EF4ab7585569D2415a1C1055D', // USDT on Monad testnet
   WBTC: '0xcf5a6076cfa32686c0Df13aBaDa2b40dec133F1d', // WBTC on Monad testnet
-  WSOL: '0x5387C85A4965769f6B0Df430638a1388493486F1', // WSOL on Monad testnet
 };
 ```
 
@@ -70,7 +67,7 @@ export const TOKEN_ADDRESSES = {
 
 - **Voice-Based Amounts**: Swap amount based on voice intensity (0-0.1 MON)
 - **Real-Time Quotes**: Get live pricing from 0x API
-- **Multiple Tokens**: Support for USDC, USDT, WETH, WBTC, WSOL
+- **Multiple Tokens**: Support for USDC, WBTC
 - **Transaction Tracking**: View all swaps on Monad explorer
 - **Error Handling**: Comprehensive error messages and fallbacks
 
