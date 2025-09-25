@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Retro Arcade Color Palette - HSL only */
+    --background: 220 25% 8%;
+    --foreground: 60 100% 95%;
+
+    --card: 220 25% 12%;
+    --card-foreground: 60 100% 95%;
+
+    --popover: 220 25% 12%;
+    --popover-foreground: 60 100% 95%;
+
+    --primary: 315 100% 65%;
+    --primary-foreground: 220 25% 8%;
+
+    --secondary: 195 100% 65%;
+    --secondary-foreground: 220 25% 8%;
+
+    --muted: 220 25% 15%;
+    --muted-foreground: 60 50% 70%;
+
+    --accent: 120 100% 65%;
+    --accent-foreground: 220 25% 8%;
+
+    --destructive: 0 100% 65%;
+    --destructive-foreground: 60 100% 95%;
+
+    --border: 220 25% 20%;
+    --input: 220 25% 15%;
+    --ring: 315 100% 65%;
+
+    /* Neon Colors */
+    --neon-pink: 315 100% 65%;
+    --neon-blue: 195 100% 65%;
+    --neon-green: 120 100% 65%;
+    --neon-yellow: 60 100% 65%;
+    --neon-purple: 270 100% 65%;
+    --neon-orange: 30 100% 65%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--neon-pink)), hsl(var(--neon-blue)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--neon-blue)), hsl(var(--neon-green)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--neon-green)), hsl(var(--neon-yellow)));
+    --gradient-rainbow: linear-gradient(90deg, hsl(var(--neon-pink)), hsl(var(--neon-purple)), hsl(var(--neon-blue)), hsl(var(--neon-green)), hsl(var(--neon-yellow)), hsl(var(--neon-orange)));
+
+    /* Shadows & Glows */
+    --shadow-neon-pink: 0 0 20px hsl(var(--neon-pink) / 0.5);
+    --shadow-neon-blue: 0 0 20px hsl(var(--neon-blue) / 0.5);
+    --shadow-neon-green: 0 0 20px hsl(var(--neon-green) / 0.5);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Keep dark theme same as light for arcade look */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Courier New', monospace;
+  }
+
+  /* Arcade-style utility classes */
+  .neon-glow-pink {
+    box-shadow: var(--shadow-neon-pink);
+  }
+  
+  .neon-glow-blue {
+    box-shadow: var(--shadow-neon-blue);
+  }
+  
+  .neon-glow-green {
+    box-shadow: var(--shadow-neon-green);
+  }
+
+  .gradient-text {
+    background: var(--gradient-rainbow);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .arcade-border {
+    border: 2px solid hsl(var(--primary));
+    box-shadow: var(--shadow-neon-pink);
+  }
+
+  .pulse-rainbow {
+    animation: pulse-rainbow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulse-rainbow {
+    0% { border-color: hsl(var(--neon-pink)); box-shadow: 0 0 20px hsl(var(--neon-pink) / 0.5); }
+    25% { border-color: hsl(var(--neon-blue)); box-shadow: 0 0 20px hsl(var(--neon-blue) / 0.5); }
+    50% { border-color: hsl(var(--neon-green)); box-shadow: 0 0 20px hsl(var(--neon-green) / 0.5); }
+    75% { border-color: hsl(var(--neon-yellow)); box-shadow: 0 0 20px hsl(var(--neon-yellow) / 0.5); }
+    100% { border-color: hsl(var(--neon-purple)); box-shadow: 0 0 20px hsl(var(--neon-purple) / 0.5); }
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+    20%, 40%, 60%, 80% { transform: translateX(2px); }
+  }
+
+  @keyframes spin-wheel {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(1800deg); }
+  }
+
+  @keyframes flash {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0.3; }
+  }
+
+  .shake {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  .flash {
+    animation: flash 1s ease-in-out infinite;
+  }
+}
