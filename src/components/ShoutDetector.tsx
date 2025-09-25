@@ -16,7 +16,7 @@ export const ShoutDetector = ({ onShoutDetected, disabled }: ShoutDetectorProps)
   const analyserRef = useRef<AnalyserNode | null>(null);
   const animationRef = useRef<number>();
 
-  const SHOUT_THRESHOLD = 0.3; // Adjust this value to change sensitivity
+  const SHOUT_THRESHOLD = 0.5; // Adjust this value to change sensitivity
 
   console.log('🎤 ShoutDetector rendered:', { isListening, volume, shoutDetected, disabled });
 
